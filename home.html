@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureVision | Advanced CCTV Monitoring</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --surface: #101c30;
+      --text: #e7eefc;
+      --muted: #8ea0bd;
+      --accent: #3b82f6;
+      --accent-2: #22c55e;
+      --border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%), linear-gradient(135deg, #07111f, #0f1d33);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    .landing-shell { min-height: 100vh; padding: 24px; }
+    .landing-header {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 18px 24px; border: 1px solid var(--border); border-radius: 20px;
+      background: rgba(10, 18, 32, 0.9); box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+    .brand h2 { margin: 0 0 6px; font-size: 1.1rem; }
+    .brand p { margin: 0; color: var(--muted); }
+    .landing-nav { display: flex; gap: 18px; color: var(--muted); }
+    .landing-nav a:hover { color: #f8fafc; }
+    .button {
+      display: inline-block; border: 0; border-radius: 999px; padding: 10px 14px;
+      background: linear-gradient(135deg, var(--accent), #2563eb); color: #fff;
+      cursor: pointer; font-weight: 600;
+    }
+    .button.secondary { background: var(--surface); border: 1px solid var(--border); }
+    .landing-main { max-width: 1180px; margin: 24px auto 0; display: flex; flex-direction: column; gap: 20px; }
+    .hero {
+      display: grid; grid-template-columns: 1.25fr 0.9fr; gap: 24px; align-items: center;
+      padding: 30px; border-radius: 24px; background: linear-gradient(135deg, rgba(16,28,48,0.95), rgba(10,20,37,0.95));
+      border: 1px solid var(--border); box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+    }
+    .eyebrow { display: inline-block; margin-bottom: 10px; color: #93c5fd; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.8rem; }
+    .hero h1 { margin: 0 0 12px; font-size: clamp(2rem, 3vw, 3rem); line-height: 1.1; }
+    .hero-copy p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 12px; margin: 18px 0 16px; flex-wrap: wrap; }
+    .hero-points { display: grid; gap: 8px; padding: 0; margin: 0; list-style: none; color: #cbd5e1; }
+    .hero-points li::before { content: "✓"; color: #22c55e; margin-right: 8px; }
+    .hero-card { padding: 22px; border-radius: 20px; background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(16,28,48,0.95)); border: 1px solid rgba(59,130,246,0.2); }
+    .hero-card-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .badge.success { background: rgba(34,197,85,0.18); color: #86efac; }
+    .badge.info { background: rgba(59,130,246,0.16); color: #93c5fd; }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .hero-stats div { padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.04); display: flex; flex-direction: column; gap: 4px; }
+    .hero-stats strong { font-size: 1.2rem; color: #f8fafc; }
+    .hero-stats span { color: var(--muted); font-size: 0.82rem; }
+    .section-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
+    .feature-card p { color: var(--muted); margin: 0; line-height: 1.6; }
+    .insights-section { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+    .stat-box { padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.04); display: flex; flex-direction: column; gap: 4px; }
+    .stat-box strong { font-size: 1.1rem; }
+    .stat-box span { color: var(--muted); font-size: 0.85rem; }
+    .check-list { padding-left: 18px; color: #cbd5e1; display: grid; gap: 8px; }
+    .landing-footer { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; margin-top: 8px; border-top: 1px solid var(--border); color: var(--muted); }
+    @media (max-width: 900px) {
+      .hero, .insights-section, .section-grid { grid-template-columns: 1fr; }
+      .landing-header, .landing-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-shell">
+    <header class="landing-header">
+      <div class="brand">
+        <h2>SecureVision</h2>
+        <p>Advanced CCTV Monitoring Platform</p>
+      </div>
+      <nav class="landing-nav">
+        <a href="#features">Features</a>
+        <a href="#insights">Insights</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="button" href="dashboard.php">Open Dashboard</a>
+    </header>
+
+    <main class="landing-main">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Next-Gen Security Operations</p>
+          <h1>Protect every corner with intelligent monitoring.</h1>
+          <p>SecureVision gives your team real-time visibility, smart alerts, and centralized control for modern surveillance operations.</p>
+          <div class="hero-actions">
+            <a class="button" href="dashboard.php">Launch Platform</a>
+            <a class="button secondary" href="#features">Explore Features</a>
+          </div>
+          <ul class="hero-points">
+            <li>Live camera monitoring</li>
+            <li>Automatic alert management</li>
+            <li>Detailed reporting and playback</li>
+          </ul>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="badge success">System Online</span>
+            <span class="badge info">24/7 Protection</span>
+          </div>
+          <h3>Operations at a glance</h3>
+          <div class="hero-stats">
+            <div>
+              <strong>18</strong>
+              <span>Cameras</span>
+            </div>
+            <div>
+              <strong>96%</strong>
+              <span>Coverage</span>
+            </div>
+            <div>
+              <strong>4.8/5</strong>
+              <span>Response</span>
+            </div>
+          </div>
+          <p>Stay informed with instant camera previews, intelligent alert routing, and secure access controls.</p>
+        </div>
+      </section>
+
+      <section id="features" class="section-grid">
+        <article class="card feature-card">
+          <h3>Live Monitoring</h3>
+          <p>View active streams, keep an eye on critical zones, and respond in seconds.</p>
+        </article>
+        <article class="card feature-card">
+          <h3>Smart Alerts</h3>
+          <p>Configure motion and intrusion events to trigger real-time notifications instantly.</p>
+        </article>
+        <article class="card feature-card">
+          <h3>Playback & Reports</h3>
+          <p>Investigate incidents with searchable playback history and polished reports.</p>
+        </article>
+      </section>
+
+      <section id="insights" class="insights-section">
+        <div class="card">
+          <h3>Operational Snapshot</h3>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <strong>12</strong>
+              <span>Active Zones</span>
+            </div>
+            <div class="stat-box">
+              <strong>3</strong>
+              <span>Critical Alerts</span>
+            </div>
+            <div class="stat-box">
+              <strong>1.2h</strong>
+              <span>Average Review Time</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Why teams choose SecureVision</h3>
+          <ul class="check-list">
+            <li>Fast onboarding for operators</li>
+            <li>Secure centralized control</li>
+            <li>Scalable monitoring workflows</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="landing-footer">
+      <p>Ready to secure your facility?</p>
+      <a class="button" href="settings.php">Configure System</a>
+    </footer>
+  </div>
+</body>
+</html>
